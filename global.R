@@ -83,5 +83,9 @@ covid19fix %>%
   arrange(desc(Total.Cases)) %>%
   select(Provinsi, Total.Cases, Total.Recovered, Total.Deaths)
 
-name <-c("Total.Cases","Total.Recovered","Total.Deaths","Total.Active.Cases")
-names(name) <- c(" Total Cases", "Total Recovered", "Total Deaths", "Total Aktif Cases")
+name <-c("Total.Cases" = "Total Cases",
+         "Total.Recovered" ="Total Recovered",
+         "Total.Deaths" = "Total Deaths",
+         "Total.Active.Cases" = "Total Active Cases")
+
+

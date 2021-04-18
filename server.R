@@ -105,21 +105,34 @@ Penelitian menyebutkan bahwa SARS-CoV ditransmisikan dari kucing luwak (civetcat
     )
   )
 
-
-  output$lineprovinsi <- renderPlotly({
-    temp <- covid19fix %>%
+  c19f<- reactive({
+    req(input$provi)
+    covid19fix %>%
       filter(Provinsi %in% c(input$provi)) %>%
       select(Total.Cases, Total.Recovered, Total.Deaths, Total.Active.Cases,Date,Provinsi) %>%
-      pivot_longer(cols = c("Total.Cases","Total.Deaths","Total.Recovered","Total.Active.Cases")) %>%
-      filter(name %in% input$boxcategory) %>%
-      # mutate(label = glue(
-      # "
-      # Provinsi: {comma(Provinsi)}
-      # Date: {comma(Date)}
-      # Jumlah: {comma(input$boxcategory)}")) %>%
-      ggplot(aes(x= Date, y = value,fill = Provinsi))+
+      pivot_longer(cols = c("Total.Cases","Total.Deaths","Total.Recovered","Total.Active.Cases"))
+    })
+
+  data_c19f <- reactive({
+    req(input$boxcategory)
+    c19f() %>%
+      filter(name %in% input$boxcategory)
+  })
+
+  output$lineprovinsi <- renderPlotly({
+    temp <- data_c19f() %>%
+      # covid19fix %>%
+      # filter(Provinsi %in% c(input$provi)) %>%
+      # select(Total.Cases, Total.Recovered, Total.Deaths, Total.Active.Cases,Date,Provinsi) %>%
+      # pivot_longer(cols = c("Total.Cases","Total.Deaths","Total.Recovered","Total.Active.Cases")) %>%
+      # filter(name %in% input$boxcategory) %>%
+      mutate(label = glue("
+                      Provinsi: {Provinsi}
+                      Date: {Date}
+                      Jumlah: {value}")) %>%
+      ggplot(aes(x= Date, y = value,fill = Provinsi, text=label))+
       geom_area(aes(group= name), alpha=0.8)+
-      facet_wrap(~name, scales = "free_y")+
+      facet_wrap(~name, scales = "free_y", labeller = as_labeller(name),ncol = 2)+
       theme_dark()+
       labs(x="",y="")+
       theme(plot.background = element_rect(fill = '#000000',color = "red"))+
@@ -131,7 +144,7 @@ Penelitian menyebutkan bahwa SARS-CoV ditransmisikan dari kucing luwak (civetcat
             panel.grid.minor = element_blank(),
             panel.grid.major = element_blank())
 
-    ggplotly(temp) %>% #,tooltip = "label")
+    ggplotly(temp ,tooltip = "label") %>%
       layout(legend=list(orientation = "h", x =0.27,y =-0.2))
   })
 

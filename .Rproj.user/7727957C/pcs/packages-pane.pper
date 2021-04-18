@@ -1,0 +1,7 @@
+{
+    "installOptions": {
+        "installFromRepository": true,
+        "libraryPath": "G:/BELAJAR/R/R-4.0.5patched/library",
+        "installDependencies": true
+    }
+}

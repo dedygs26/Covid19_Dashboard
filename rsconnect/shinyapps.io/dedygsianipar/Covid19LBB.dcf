@@ -1,0 +1,14 @@
+name: Covid19LBB
+title: Covid19LBB
+username:
+account: dedygsianipar
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3938605
+bundleId: 4454765
+url: https://dedygsianipar.shinyapps.io/Covid19LBB/
+when: 1618068774.02607
+lastSyncTime: 1618068774.02607
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|covidfix|data/covid19f.csv

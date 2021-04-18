@@ -1,0 +1,13 @@
+name: LBBCov19Project
+title: LBBCov19Project
+username:
+account: dedygsianipar
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3928209
+bundleId: 4446181
+url: https://dedygsianipar.shinyapps.io/LBBCov19Project/
+when: 1617883688.07906
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: lbb/app.R
